@@ -113,12 +113,196 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-
+        board.setViewingPerspective(side);
+        boolean change0 = columnhelper(0);
+        boolean change1 = columnhelper(1);
+        boolean change2 = columnhelper(2);
+        boolean change3 = columnhelper(3);
+        changed = change0 || change1 || change2 || change3;
+        board.setViewingPerspective(Side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
         }
         return changed;
+    }
+    public boolean columnhelper(int column){
+        boolean change = false;
+        if (tile(column,3)==null&&tile(column,2)==null&&tile(column,1)==null&&tile(column,0)==null){
+        }else if (tile(column,3)==null&&tile(column,2)==null&&tile(column,1)==null&&tile(column,0)!=null){
+            board.move(column,3,tile(column,0));
+            change = true;
+        } else if (tile(column,3)==null&&tile(column,2)==null&&tile(column,1)!=null&&tile(column,0)==null) {
+            board.move(column,3,tile(column,1));
+            change = true;
+        } else if (tile(column,3)==null&&tile(column,2)==null&&tile(column,1)!=null&&tile(column,0)!=null) {
+            if (tile(column,1).value()==tile(column,0).value()){
+                tile(column,1).merge(column,3,tile(column,0));
+                board.move(column,3,tile(column,0));
+                board.move(column,3,tile(column,1));
+                score += tile(column,3).value();
+                change = true;
+            }else {
+                board.move(column,3,tile(column,1));
+                board.move(column,2,tile(column,0));
+                change = true;
+            }
+        } else if (tile(column,3)==null&&tile(column,2)!=null&&tile(column,1)==null&&tile(column,0)==null){
+            board.move(column,3,tile(column,2));
+            change = true;
+        } else if (tile(column,3)==null&&tile(column,2)!=null&&tile(column,1)==null&&tile(column,0)!=null){
+            if (tile(column,2).value()==tile(column,0).value()){
+                tile(column,2).merge(column,3,tile(column,0));
+                board.move(column,3,tile(column,2));
+                board.move(column,3,tile(column,0));
+                score += tile(column,3).value();
+                change = true;
+            }else {
+                board.move(column,3,tile(column,2));
+                board.move(column,2,tile(column,0));
+                change = true;
+            }
+        } else if (tile(column,3)==null&&tile(column,2)!=null&&tile(column,1)!=null&&tile(column,0)==null){
+            if (tile(column,2).value()==tile(column,1).value()){
+                tile(column,2).merge(column,3,tile(column,1));
+                board.move(column,3,tile(column,2));
+                board.move(column,3,tile(column,1));
+                score += tile(column,3).value();
+                change = true;
+            }else {
+                board.move(column,3,tile(column,2));
+                board.move(column,2,tile(column,1));
+                change = true;
+            }
+        } else if (tile(column,3)==null&&tile(column,2)!=null&&tile(column,1)!=null&&tile(column,0)!=null){
+            if (tile(column,2).value()==tile(column,1).value()){
+                tile(column,2).merge(column,3,tile(column,1));
+                board.move(column,3,tile(column,2));
+                board.move(column,3,tile(column,1));
+                board.move(column,2,tile(column,0));
+                score += tile(column,3).value();
+                change = true;
+            } else if(tile(column,1).value()==tile(column,0).value()){
+                board.move(column,3,tile(column,2));
+                tile(column,1).merge(column,2,tile(column,0));
+                board.move(column,2,tile(column,1));
+                board.move(column,2,tile(column,0));
+                score += tile(column,2).value();
+                change = true;
+            } else{
+                board.move(column,3,tile(column,2));
+                board.move(column,2,tile(column,1));
+                board.move(column,1,tile(column,0));
+                change = true;
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)==null&&tile(column,1)==null&&tile(column,0)==null){
+        } else if (tile(column,3)!=null&&tile(column,2)==null&&tile(column,1)==null&&tile(column,0)!=null){
+            if (tile(column,3).value()==tile(column,0).value()){
+                tile(column,3).merge(column,3,tile(column,0));
+                board.move(column,3,tile(column,0));
+                score += tile(column,3).value();
+                change = true;
+            } else {
+                board.move(column,2,tile(column,0));
+                change = true;
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)==null&&tile(column,1)!=null&&tile(column,0)==null){
+            if (tile(column,3).value()==tile(column,1).value()){
+                tile(column,3).merge(column,3,tile(column,1));
+                board.move(column,3,tile(column,1));
+                score += tile(column,3).value();
+                change = true;
+            } else {
+                board.move(column,2,tile(column,1));
+                change = true;
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)==null&&tile(column,1)!=null&&tile(column,0)!=null){
+            if (tile(column,3).value()==tile(column,1).value()){
+                tile(column,3).merge(column,3,tile(column,1));
+                board.move(column,3,tile(column,1));
+                board.move(column,2,tile(column,0));
+                score += tile(column,3).value();
+                change = true;
+            } else if (tile(column,1).value()==tile(column,0).value()) {
+                tile(column,1).merge(column,2,tile(column,0));
+                board.move(column,2,tile(column,1));
+                board.move(column,2,tile(column,0));
+                score += tile(column,2).value();
+                change = true;
+            } else {
+                board.move(column,2,tile(column,1));
+                board.move(column,1,tile(column,0));
+                change = true;
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)!=null&&tile(column,1)==null&&tile(column,0)==null){
+            if (tile(column,3).value()==tile(column,2).value()){
+                tile(column,3).merge(column,3,tile(column,2));
+                board.move(column,3,tile(column,2));
+                score += tile(column,3).value();
+                change = true;
+            }else {
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)!=null&&tile(column,1)==null&&tile(column,0)!=null){
+            if (tile(column,3).value()==tile(column,2).value()){
+                tile(column,3).merge(column,3,tile(column,2));
+                board.move(column,3,tile(column,2));
+                board.move(column,2,tile(column,0));
+                score += tile(column,3).value();
+                change = true;
+            } else if (tile(column,2).value()==tile(column,0).value()) {
+                tile(column,2).merge(column,2,tile(column,0));
+                board.move(column,2,tile(column,0));
+                score += tile(column,2).value();
+                change = true;
+            } else{
+                board.move(column,1,tile(column,0));
+                change = true;
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)!=null&&tile(column,1)!=null&&tile(column,0)==null){
+            if (tile(column,3).value()==tile(column,2).value()){
+                tile(column,3).merge(column,3,tile(column,2));
+                board.move(column,3,tile(column,2));
+                board.move(column,2,tile(column,1));
+                score += tile(column,3).value();
+                change = true;
+            } else if (tile(column,2).value()==tile(column,1).value()) {
+                tile(column,2).merge(column,2,tile(column,1));
+                board.move(column,2,tile(column,1));
+                score += tile(column,2).value();
+                change = true;
+            } else {
+            }
+        } else if (tile(column,3)!=null&&tile(column,2)!=null&&tile(column,1)!=null&&tile(column,0)!=null){
+            if (tile(column,3).value()==tile(column,2).value()&&tile(column,1).value()==tile(column,0).value()){
+                tile(column,3).merge(column,3,tile(column,2));
+                board.move(column,3,tile(column,2));
+                score += tile(column,3).value();
+                tile(column,1).merge(column,2,tile(column,0));
+                board.move(column,2,tile(column,1));
+                board.move(column,2,tile(column,0));
+                score += tile(column,2).value();
+                change = true;
+            } else if (tile(column,3).value()==tile(column,2).value() &&tile(column,1).value()!=tile(column,0).value()) {
+                tile(column,3).merge(column,3,tile(column,2));
+                board.move(column,3,tile(column,2));
+                score += tile(column,3).value();
+                board.move(column,2,tile(column,1));
+                board.move(column,1,tile(column,0));
+                change = true;
+            } else if (tile(column,2).value()==tile(column,1).value()){
+                tile(column,2).merge(column,2,tile(column,1));
+                board.move(column,2,tile(column,1));
+                board.move(column,1,tile(column,0));
+                score += tile(column,2).value();
+                change = true;
+            } else if (tile(column,1).value()==tile(column,0).value()) {
+                tile(column,1).merge(column,1,tile(column,0));
+                board.move(column,1,tile(column,0));
+                score += tile(column,1).value();
+                change = true;
+            } else {
+            }
+        }return change;
     }
 
     /** Checks if the game is over and sets the gameOver variable
@@ -138,6 +322,13 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        for(int i = 0; i < b.size(); i++){
+            for(int j = 0; j < b.size(); j++){
+                if (b.tile(i,j) == null){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -148,6 +339,17 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        for (int i = 0; i < b.size(); i++){
+            for (int j = 0; j < b.size(); j++){
+                if (b.tile(i,j) == null){
+                }else{
+                    if (b.tile(i,j).value() == MAX_PIECE){
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 
@@ -159,6 +361,24 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        for (int i = 0; i < b.size(); i++){
+            for (int  j = 0; j < b.size(); j++){
+                if (b.tile(i,j) == null){
+                    return true;
+                }else {
+                    int x = b.tile(i,j).value();
+                    if (j+1 < b.size() && b.tile(i,j+1) != null && x == b.tile(i,j+1).value()){
+                        return true;
+                    } else if (i+1 < b.size() && b.tile(i+1,j) != null && x == b.tile(i+1,j).value()) {
+                        return true;
+                    } else if (i-1 >= 0 && b.tile(i-1,j) != null && x == b.tile(i-1,j).value()) {
+                        return true;
+                    } else if (j-1 >=0 && b.tile(i,j-1) != null && x == b.tile(i,j-1).value()) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
