@@ -77,6 +77,9 @@ public class ArrayDeque<T> {
         }
     }
     public T get(int index){
+        if (size == 0){
+            return null;
+        }
         return items[(index + front) % N];
     }
 }
