@@ -19,7 +19,8 @@ public class ArrayDeque<T> {
             rear += 1;
             size += 1;
         } else if (size < N) {
-            items[(front - 1 + N) % N] = item;
+            front = (front - 1 + N) % N;
+            items[front] = item;
             size += 1;
         } else {
             resize(size* RFACTOR);
@@ -69,8 +70,8 @@ public class ArrayDeque<T> {
         if (size == 0){
             return null;
         } else{
-            T item = items[rear];
             rear = (rear - 1 + N) % N;
+            T item = items[rear];
             size -= 1;
             return item;
         }
