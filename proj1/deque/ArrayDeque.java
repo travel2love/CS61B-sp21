@@ -12,6 +12,7 @@ public class ArrayDeque<T> {
     }
     public void resize(int x){
         T[] a = (T []) new Object[size * RFACTOR];;
+
     }
     public void addFirst(T item){
         if (size == 0){
@@ -34,7 +35,8 @@ public class ArrayDeque<T> {
             rear += 1;
             size += 1;
         } else if (size < N) {
-            items[(rear + 1 + N) % N] = item;
+            items[rear] = item;
+            rear = (rear + 1 + N) % N;
             size += 1;
         } else {
             resize(size* RFACTOR);
@@ -51,9 +53,9 @@ public class ArrayDeque<T> {
         return size;
     }
     public void printDeque(){
-        for (int i = front;i < size + i;i++){
-            System.out.println(items[i % N]);
-            System.out.println(" ");
+        for (int i = front;i < size + front;i++){
+            System.out.print(items[i % N]);
+            System.out.print(" ");
         }
     }
     public T removeFirst(){
