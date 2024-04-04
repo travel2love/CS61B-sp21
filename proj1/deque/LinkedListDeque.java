@@ -99,8 +99,8 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
     @Override
     public Iterator<T> iterator() {
-        ArrayDeque<T> ad = new ArrayDeque<>();
-        return ad.iterator();
+        LinkedListDeque<T> ld = new LinkedListDeque<>();
+        return ld.iterator();
     }
     @Override
     public boolean equals(Object o) {
