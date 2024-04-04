@@ -1,6 +1,5 @@
 package deque;
 
-import afu.org.checkerframework.checker.oigj.qual.O;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T> {
@@ -97,7 +96,7 @@ public class LinkedListDeque<T> implements Deque<T> {
             return getRecursive(i - 1);
         }
     }
-    @Override
+
     public Iterator<T> iterator() {
         LinkedListDeque<T> ld = new LinkedListDeque<>();
         return ld.iterator();

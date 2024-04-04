@@ -1,6 +1,5 @@
 package deque;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class ArrayDeque<T> implements Deque<T> {
@@ -10,12 +9,12 @@ public class ArrayDeque<T> implements Deque<T> {
     int front = 0;
     int rear = 0;
     int size = 0;
-    public ArrayDeque(){
+    public ArrayDeque() {
         T[] newitem = (T []) new Object[N];
     }
     public void resize(int x) {
         T[] a = (T []) new Object[x];;
-        System.arraycopy(items,0,a,0,size);
+        System.arraycopy(items,0, a,0, size);
         items = a;
     }
     @Override
@@ -98,7 +97,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return items[(index + front) % N];
     }
-    @Override
+
     public Iterator<T> iterator() {
         ArrayDeque<T> ad = new ArrayDeque<>();
         return ad.iterator();
