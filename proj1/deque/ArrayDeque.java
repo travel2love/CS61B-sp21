@@ -3,7 +3,7 @@ package deque;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Deque<T> {
 
     int N = 8;
     T[] items = (T []) new Object[N];
@@ -19,7 +19,7 @@ public class ArrayDeque<T> implements Deque<T>{
         items = a;
     }
     @Override
-    public void addFirst(T item){
+    public void addFirst(T item) {
         if (size == 0){
             items[front] = item;
             rear += 1;
@@ -35,8 +35,8 @@ public class ArrayDeque<T> implements Deque<T>{
         }
     }
     @Override
-    public void addLast(T item){
-        if (size == 0){
+    public void addLast(T item) {
+        if (size == 0) {
             items[rear] = item;
             rear += 1;
             size += 1;
@@ -55,56 +55,56 @@ public class ArrayDeque<T> implements Deque<T>{
         return size;
     }
     @Override
-    public void printDeque(){
-        for (int i = front;i < size + front;i++){
+    public void printDeque() {
+        for (int i = front;i < size + front;i++) {
             System.out.print(items[i % N]);
             System.out.print(" ");
         }
     }
     @Override
-    public T removeFirst(){
+    public T removeFirst() {
         if (size == 0){
             return null;
-        } else{
+        } else {
             T item = items[front];
             front = (front + 1) % N;
             size -= 1;
             double len = items.length;
-            if (size / len <= 0.5){
+            if (size / len <= 0.5) {
                 resize(items.length / 2);
             }
             return item;
         }
     }
     @Override
-    public T removeLast(){
+    public T removeLast() {
         if (size == 0){
             return null;
-        } else{
+        } else {
             rear = (rear - 1 + N) % N;
             T item = items[rear];
             size -= 1;
             double len = items.length;
-            if (size / len <= 0.25){
+            if (size / len <= 0.25) {
                 resize(items.length / 2);
             }
             return item;
         }
     }
     @Override
-    public T get(int index){
-        if (size == 0){
+    public T get(int index) {
+        if (size == 0) {
             return null;
         }
         return items[(index + front) % N];
     }
     @Override
-    public Iterator<T> iterator(){
+    public Iterator<T> iterator() {
         ArrayDeque<T> ad = new ArrayDeque<>();
         return ad.iterator();
     }
     @Override
-    public boolean equals(Object o){
-        return o instanceof ArrayDeque;
+    public boolean equals(Object o) {
+        return o instanceof ArrayDeque && o.equals(this);
     }
 }

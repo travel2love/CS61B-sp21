@@ -1,20 +1,21 @@
 package deque;
 
-import jh61b.junit.In;
+import afu.org.checkerframework.checker.oigj.qual.O;
+import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T>{
+public class LinkedListDeque<T> implements Deque<T> {
     private IntNode sentinel;
     int size;
-    public class IntNode{
+    public class IntNode {
         public IntNode prev;
         public T item;
         public IntNode next;
-        public IntNode(T i, IntNode n){
+        public IntNode(T i, IntNode n) {
             item = i;
             next = n;
         }
     }
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         T item = null;
         sentinel = new IntNode(item,null);
         sentinel.prev = sentinel;
@@ -22,7 +23,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         size = 0;
     }
     @Override
-    public void addFirst(T item){
+    public void addFirst(T item) {
         IntNode node = new IntNode(item,null);
         node.next = sentinel.next;
         sentinel.next.prev = node;
@@ -31,7 +32,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         size += 1;
     }
     @Override
-    public void addLast(T item){
+    public void addLast(T item) {
         IntNode node = new IntNode(item,null);
         sentinel.prev.next = node;
         node.prev = sentinel.prev;
@@ -43,7 +44,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         return size;
     }
     @Override
-    public void printDeque(){
+    public void printDeque() {
         for (int i = 0;i < size;i++) {
             IntNode p = sentinel;
             System.out.print(p.next.item);
@@ -52,7 +53,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
     }
     @Override
-    public T removeFirst(){
+    public T removeFirst() {
         if (size == 0){
             return null;
         }
@@ -63,7 +64,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         return item;
     }
     @Override
-    public T removeLast(){
+    public T removeLast() {
         if (size == 0){
             return null;
         }
@@ -74,8 +75,8 @@ public class LinkedListDeque<T> implements Deque<T>{
         return item;
     }
     @Override
-    public T get(int index){
-        if (index >= size){
+    public T get(int index) {
+        if (index >= size) {
             return null;
         }
         int i = 0;
@@ -86,7 +87,7 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
         return p.next.item;
     }
-    public T getRecursive(int index){
+    public T getRecursive(int index) {
         int i = 0;
         IntNode p = sentinel;
         if (i == index){
@@ -95,5 +96,14 @@ public class LinkedListDeque<T> implements Deque<T>{
             p = p.next;
             return getRecursive(i - 1);
         }
+    }
+    @Override
+    public Iterator<T> iterator() {
+        ArrayDeque<T> ad = new ArrayDeque<>();
+        return ad.iterator();
+    }
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof LinkedListDeque && o.equals(this);
     }
 }

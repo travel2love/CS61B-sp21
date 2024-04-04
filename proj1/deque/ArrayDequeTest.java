@@ -30,6 +30,7 @@ public class ArrayDequeTest {
     public void test2(){
         Deque<Integer> a = new ArrayDeque<>();
         a = new ArrayDeque<>();
+
         
     }
 }
