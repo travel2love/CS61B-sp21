@@ -100,6 +100,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public Iterator<T> iterator() {
         ArrayDeque<T> ad = new ArrayDeque<>();
+        for (int i = 0;i < size;i++) {
+            ad.addLast(items[i]);
+        }
         return ad.iterator();
     }
     @Override
