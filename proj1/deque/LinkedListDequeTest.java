@@ -1,6 +1,9 @@
 package deque;
 
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
@@ -124,12 +127,56 @@ public class LinkedListDequeTest {
         }
     }
     @Test
-    public void test1(){
+    public void test1() {
         LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
         lld2.addFirst(10);
         lld2.addLast(12);
         lld2.removeLast();
         lld2.printDeque();
         System.out.println(lld2.getRecursive(0));
+    }
+    @Test
+    public void test2() {
+        LinkedListDeque<Integer> lld3 = new LinkedListDeque<>();
+        lld3.addLast(0);
+        lld3.removeLast();
+    }
+    @Test
+    public void test3() {
+        LinkedListDeque<Integer> lld4 = new LinkedListDeque<>();
+        assertTrue(lld4.isEmpty());
+        lld4.addFirst(1);
+        int i = 1;
+        int x = lld4.removeLast();
+        assertEquals(i, x);
+        lld4.addFirst(3);
+        lld4.addLast(4);
+        int j = 3;
+        int y = lld4.removeFirst();
+        assertEquals(j, y);
+    }
+    @Test
+    public void gettest() {
+        LinkedListDeque<Integer> lld5 = new LinkedListDeque<>();
+        lld5.addFirst(0);
+        lld5.removeLast();
+        lld5.addFirst(2);
+        lld5.removeFirst();
+        lld5.addLast(4);
+        int x = 4;
+        int y = lld5.get(0);
+        assertEquals(x, y);
+        System.out.println(lld5.getRecursive(0));
+    }
+    @Test
+    public void itertest() {
+        LinkedListDeque<Integer> lld6 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++){
+            lld6.addLast(i);
+        }
+        Iterator<Integer> it = lld6.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
     }
 }

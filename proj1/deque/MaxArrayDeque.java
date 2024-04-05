@@ -6,10 +6,10 @@ public class MaxArrayDeque<T> {
     public MaxArrayDeque(Comparator<T> c) {
 
     }
-    public T max(){
+    public T max() {
         return null;
     }
-    public T max(Comparator<T> c){
+    public T max(Comparator<T> c) {
         return null;
     }
 }

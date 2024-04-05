@@ -4,22 +4,22 @@ import java.util.Iterator;
 
 public class ArrayDeque<T> implements Deque<T> {
 
-    int N = 8;
-    T[] items = (T []) new Object[N];
-    int front = 0;
-    int rear = 0;
-    int size = 0;
+    private int N = 8;
+    private T[] items = (T []) new Object[N];
+    private int front = 0;
+    private int rear = 0;
+    private int size = 0;
     public ArrayDeque() {
         T[] newitem = (T []) new Object[N];
     }
     public void resize(int x) {
-        T[] a = (T []) new Object[x];;
-        System.arraycopy(items,0, a,0, size);
+        T[] a = (T []) new Object[x];
+        System.arraycopy(items, 0, a, 0, size);
         items = a;
     }
     @Override
     public void addFirst(T item) {
-        if (size == 0){
+        if (size == 0) {
             items[front] = item;
             rear += 1;
             size += 1;
@@ -50,19 +50,19 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
     @Override
     public void printDeque() {
-        for (int i = front;i < size + front;i++) {
+        for (int i = front; i < size + front; i++) {
             System.out.print(items[i % N]);
             System.out.print(" ");
         }
     }
     @Override
     public T removeFirst() {
-        if (size == 0){
+        if (size == 0) {
             return null;
         } else {
             T item = items[front];
@@ -77,7 +77,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
     @Override
     public T removeLast() {
-        if (size == 0){
+        if (size == 0) {
             return null;
         } else {
             rear = (rear - 1 + N) % N;
@@ -99,11 +99,18 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public Iterator<T> iterator() {
-        ArrayDeque<T> ad = new ArrayDeque<>();
-        for (int i = 0;i < size;i++) {
-            ad.addLast(items[i]);
+        return new aditerator();
+    }
+    private class aditerator implements Iterator<T>{
+        int i = 0;
+        public boolean hasNext(){
+            return i < size;
         }
-        return ad.iterator();
+        public T next(){
+            T item = get(i);
+            i += 1;
+            return item;
+        }
     }
     @Override
     public boolean equals(Object o) {

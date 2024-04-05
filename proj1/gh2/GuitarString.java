@@ -1,8 +1,8 @@
 package gh2;
 
 // TODO: uncomment the following import once you're ready to start this portion
- import deque.Deque;
- import deque.LinkedListDeque;
+import deque.Deque;
+import deque.LinkedListDeque;
 // TODO: maybe more imports
 
 //Note: This file will not compile until you complete the Deque implementations
@@ -13,7 +13,7 @@ public class GuitarString {
     private static final int SR = 44100;      // Sampling Rate
     private static final double DECAY = .996; // energy decay factor
 
-    int capacity;
+    private int capacity;
     /* Buffer for storing sound data. */
     // TODO: uncomment the following line once you're ready to start this portion
      private Deque<Double> buffer;
@@ -26,7 +26,7 @@ public class GuitarString {
         //       Your should initially fill your buffer array with zeros.
         buffer = new LinkedListDeque<>();
         capacity = (int) Math.round(SR / frequency);
-        for (int i = 0;i < capacity;i++){
+        for (int i = 0; i < capacity; i++) {
             double x = 0;
             buffer.addFirst(x);
         }
@@ -43,10 +43,10 @@ public class GuitarString {
         //       other. This does not mean that you need to check that the numbers
         //       are different from each other. It means you should repeatedly call
         //       Math.random() - 0.5 to generate new random numbers for each array index.
-        for (int i = 0;i < capacity;i++){
+        for (int i = 0; i < capacity; i++) {
             buffer.removeFirst();
         }
-        for (int i = 0;i < capacity;i++){
+        for (int i = 0; i < capacity; i++) {
             double r = Math.random() - 0.5;
             buffer.addFirst(r);
         }
