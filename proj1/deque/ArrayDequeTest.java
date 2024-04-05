@@ -50,4 +50,16 @@ public class ArrayDequeTest {
         assertEquals(0,dq.size());
     }
 
+    @Test
+    public void equalstest() {
+        ArrayDeque<Integer> ad7 = new ArrayDeque<>();
+        ad7.addLast(1);
+        ad7.addLast(3);
+        ad7.addLast(5);
+        ArrayDeque<Integer> ad8 = new ArrayDeque<>();
+        ad8.addLast(1);
+        ad8.addLast(3);
+        ad8.addLast(5);
+        System.out.println(ad7.equals(ad8));
+    }
 }

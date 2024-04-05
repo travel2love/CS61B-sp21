@@ -179,4 +179,16 @@ public class LinkedListDequeTest {
             System.out.println(it.next());
         }
     }
+    @Test
+    public void equalstest() {
+        LinkedListDeque<Integer> lld7 = new LinkedListDeque<>();
+        lld7.addLast(1);
+        lld7.addLast(3);
+        lld7.addLast(5);
+        LinkedListDeque<Integer> lld8 = new LinkedListDeque<>();
+        lld8.addLast(1);
+        lld8.addLast(3);
+        lld8.addLast(5);
+        System.out.println(lld7.equals(lld8));
+    }
 }
