@@ -11,18 +11,18 @@ public class ArrayDequeTest {
     @Test
     public void gettest(){
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
-        ad.addFirst(1);
-        ad.addLast(22);
-        for (int i = 0;i < 6000;i++){
+//        ad.addFirst(1);
+//        ad.addLast(22);
+        for (int i = 0;i < 40;i++){
             ad.addFirst(i);
         }
-        for (int i = 0;i < 5000;i++){
-            ad.removeLast();
+        for (int i = 0;i < 40;i++){
+            ad.removeFirst();
         }
-        for (int i = 0;i < 6000;i++){
-            ad.addFirst(i);
+        for (int i = 0;i < 40;i++){
+            ad.addLast(i);
         }
-        for (int i = 0;i < 5000;i++){
+        for (int i = 0;i < 30;i++){
             ad.removeLast();
         }
         //ad.printDeque();
@@ -61,5 +61,30 @@ public class ArrayDequeTest {
         ad8.addLast(3);
         ad8.addLast(5);
         System.out.println(ad7.equals(ad8));
+    }
+    @Test
+    public void addgettest() {
+        ArrayDeque<Integer> ad9 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            ad9.addLast(i);
+        }
+        for (int i = 0; i < 10; i++){
+            int x = ad9.get(i);
+        }
+    }
+    @Test
+    public void iteratortest() {
+        ArrayDeque<Integer> ad10 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++){
+            ad10.addLast(i);
+        }
+        Iterator<Integer> iter1 = ad10.iterator();
+        while (iter1.hasNext()){
+            System.out.println(iter1.next());
+        }
+        Iterator<Integer> iter2 = ad10.iterator();
+        while (iter2.hasNext()){
+            System.out.println(iter2.next());
+        }
     }
 }

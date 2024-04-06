@@ -19,7 +19,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         T item = null;
         SentiNode = new IntNode(null, null);
         sentinel = new IntNode(item, SentiNode);
-        sentinel.next = SentiNode;
+        sentinel= SentiNode;
         SentiNode.prev = SentiNode;
         SentiNode.next = SentiNode;
         size = 0;
@@ -60,6 +60,12 @@ public class LinkedListDeque<T> implements Deque<T> {
             return null;
         }
         T item = SentiNode.next.item;
+        if (size == 1){
+            SentiNode.next = SentiNode;
+            SentiNode.prev = SentiNode;
+            size -= 1;
+            return item;
+        }
         SentiNode.next.next.prev = SentiNode;
         SentiNode.next = SentiNode.next.next;
         size -= 1;

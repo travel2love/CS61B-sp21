@@ -12,10 +12,11 @@ public class ArrayDeque<T> implements Deque<T> {
     public ArrayDeque() {
         T[] newitem = (T []) new Object[N];
     }
-    public void resize(int x) {
+    private void resize(int x) {
         T[] a = (T []) new Object[x];
         System.arraycopy(items, 0, a, 0, size);
         items = a;
+        N = x;
     }
     @Override
     public void addFirst(T item) {
@@ -24,12 +25,13 @@ public class ArrayDeque<T> implements Deque<T> {
             rear += 1;
             size += 1;
         } else if (size < items.length) {
-            front = (front - 1 + N) % N;
+            front = (front + 1 + N) % N;
             items[front] = item;
             size += 1;
         } else {
             resize(size * 2);
             items[size] = item;
+            front += 1;
             size += 1;
         }
     }
@@ -39,13 +41,14 @@ public class ArrayDeque<T> implements Deque<T> {
             items[rear] = item;
             rear += 1;
             size += 1;
-        } else if (size < items.length) {
+        } else if (size < items.length - 1) {
             items[rear] = item;
             rear = (rear + 1 + N) % N;
             size += 1;
         } else {
             resize(size * 2);
             items[size] = item;
+            rear += 1;
             size += 1;
         }
     }
@@ -66,10 +69,15 @@ public class ArrayDeque<T> implements Deque<T> {
             return null;
         } else {
             T item = items[front];
-            front = (front + 1) % N;
+            items[front] = null;
+            if (front < rear) {
+                front = front + 1;
+            } else {
+                front = front - 1;
+            }
             size -= 1;
             double len = items.length;
-            if (size / len <= 0.5) {
+            if (size >=16 && size / len <= 0.25) {
                 resize(items.length / 2);
             }
             return item;
@@ -84,7 +92,7 @@ public class ArrayDeque<T> implements Deque<T> {
             T item = items[rear];
             size -= 1;
             double len = items.length;
-            if (size / len <= 0.25) {
+            if (size >= 16 && size / len <= 0.25) {
                 resize(items.length / 2);
             }
             return item;
@@ -99,14 +107,14 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public Iterator<T> iterator() {
-        return new aditerator();
+        return new AdIterator();
     }
-    private class aditerator implements Iterator<T>{
+    private class AdIterator implements Iterator<T> {
         int i = 0;
-        public boolean hasNext(){
+        public boolean hasNext() {
             return i < size;
         }
-        public T next(){
+        public T next() {
             T item = get(i);
             i += 1;
             return item;
@@ -124,7 +132,7 @@ public class ArrayDeque<T> implements Deque<T> {
             return false;
         }
         ArrayDeque<T> other = (ArrayDeque<T>) o;
-        if (this.size()!= other.size()) {
+        if (this.size() != other.size()) {
             return false;
         }
         for (int i = 0;i < size;i++){

@@ -191,4 +191,19 @@ public class LinkedListDequeTest {
         lld8.addLast(5);
         System.out.println(lld7.equals(lld8));
     }
+    @Test
+    public void randomtest1() {
+        LinkedListDeque<Integer> lld9 = new LinkedListDeque<>();
+        lld9.addLast(10);
+        int x = lld9.removeFirst();
+        assertEquals(10,x);
+    }
+    @Test
+    public void equals2test() {
+        LinkedListDeque<Integer> lld10 = new LinkedListDeque<>();
+        ArrayDeque<Integer> ad10 = new ArrayDeque<>();
+        lld10.addLast(10);
+        ad10.addLast(10);
+        assertTrue(lld10.equals(ad10));
+    }
 }
