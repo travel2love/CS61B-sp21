@@ -77,7 +77,7 @@ public class ArrayDeque<T> implements Deque<T> {
             }
             size -= 1;
             double len = items.length;
-            if (size >=16 && size / len <= 0.25) {
+            if (size >= 16 && size / len <= 0.25) {
                 resize(items.length / 2);
             }
             return item;
@@ -105,7 +105,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return items[(index + front) % N];
     }
-
+    @Override
     public Iterator<T> iterator() {
         return new AdIterator();
     }
@@ -135,7 +135,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (this.size() != other.size()) {
             return false;
         }
-        for (int i = 0;i < size;i++){
+        for (int i = 0; i < size; i++) {
             if (this.get(i) != other.get(i)) {
                 return false;
             }
