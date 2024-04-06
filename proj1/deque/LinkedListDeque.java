@@ -98,7 +98,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     public T getRecursive(int index) {
         return null;
     }
-    
+
     public Iterator<T> iterator() {
         Iterator<T> iter = new Iterator<T>() {
             int i = 0;
