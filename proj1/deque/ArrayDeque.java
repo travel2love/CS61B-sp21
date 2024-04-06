@@ -105,7 +105,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return items[(index + front) % N];
     }
-    @Override
+
     public Iterator<T> iterator() {
         return new AdIterator();
     }
