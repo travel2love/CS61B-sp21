@@ -21,6 +21,13 @@ public class Commit {
 
     /** The message of this Commit. */
     private String message;
+    private String commitMessage;
+    private Date date;
+
+    public Commit(String message, Date date) {
+        this.message = message;
+        this.date = new Date(0);
+    }
 
     /* TODO: fill in the rest of this class. */
 }
