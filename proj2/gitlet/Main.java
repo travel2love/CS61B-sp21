@@ -166,11 +166,11 @@ public class Main {
                     File f2 = new File(args[3]);
                     File commit_tree_file = join(new File(System.getProperty("user.dir")), ".gitlet", "CommitTree", "Tree");
                     CommitTree commit_tree5 = readObject(commit_tree_file, CommitTree.class);
-                    Commit current_commit = commit_tree5.CurrentCommit;
-                    while (!current_commit.commitID.equals(args[1])) {
-                        current_commit = current_commit.parentCommit;
+                    Commit current_commit1 = commit_tree5.CurrentCommit;
+                    while (!current_commit1.commitID.equals(args[1])) {
+                        current_commit1 = current_commit1.parentCommit;
                     }
-                    Map<String, File> map2 = current_commit.map;
+                    Map<String, File> map2 = current_commit1.map;
                     File new_file1 = map2.get(f2.getName());
                     f2.delete();
                     try {
