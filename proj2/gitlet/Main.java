@@ -81,16 +81,18 @@ public class Main {
                 }
                 //iterate the map from current_commit to Objects_Dir.
                 //create a new commit.
-//                if (current_map == null) {
-//                } else {
-//                    for (String key : current_map.keySet()) {
-//                        File new_file1 = Repository.Copy_File(current_map.get(key));
-//                        current_map.put(key, new_file1);
-//                    }
-//                }
+                if (current_map == null) {
+                } else {
+                    for (String key : current_map.keySet()) {
+                        File old_file1 = new File(key);
+                        File new_file1 = Repository.Copy_File(old_file1);
+                        current_map.put(key, new_file1);
+                    }
+                }
                 commitTree.AddCommit(args[1], new Date(), "master");
                 commitTree.addCurrentMap(current_map);
                 writeObject(commit_tree, commitTree);
+                System.out.println(commitTree.CurrentCommit.parentCommit.map);
                 //clear the stage area.
                 stage.delete();
                 StageArea new_stage = new StageArea();
